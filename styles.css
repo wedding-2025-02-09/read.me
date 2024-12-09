@@ -1,138 +1,59 @@
-/* スマートフォン用のレスポンシブデザイン */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* 基本のスタイル */
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: linear-gradient(135deg, #f06, #4a90e2); /* 背景をグラデーションに */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: white;
-    margin: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f4f8;
 }
 
 .container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px; /* スペースを加える */
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
 }
 
-.hp-message {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #333;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+/* タイプライターアニメーションのスタイル */
+.typewriter {
+  display: inline-block;
+  border-right: 3px solid black;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 4s steps(20) 1s forwards, blink-caret 0.75s step-end infinite;
 }
 
-.card {
-    background-color: rgba(255, 255, 255, 0.9); /* 半透明の白背景 */
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 30px 20px 60px 20px; /* 下部余白を大きく調整 */
-    text-align: center;
-    position: relative;
-    z-index: 5;
-}
-
-.card-header {
-    margin-bottom: 15px;
-}
-
-.main-message {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #333;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 0.15em solid #333;
-}
-
-.card-body p {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-}
-
-/* タイプライター方式のアニメーション */
-.typing-animation {
-    animation: typing 3s steps(40) 1s forwards, blink 0.75s step-end infinite;
-}
-
-/* タイプライター効果 */
 @keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+  100% {
+    width: 100%;
+  }
 }
 
-/* キャレットの点滅効果 */
-@keyframes blink {
-    50% {
-        border-color: transparent;
-    }
+@keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
 }
 
-/* 「お誕生日おめでとう！」のアニメーション終了後にカーソルを非表示にする */
-.main-message.finished {
-    border-right: none;  /* カーソルの非表示 */
+/* メッセージカードのスタイル */
+.message-box {
+  display: none;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #4CAF50;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s, transform 1s;
 }
 
-/* ぼんやり浮き上がるアニメーション */
-.fade-in-message {
-    opacity: 0;
-    animation: fadeIn 2s ease-out forwards;
-}
-
-.fade-in-message:nth-child(1) {
-    animation-delay: 0.5s;
-}
-
-.fade-in-message:nth-child(2) {
-    animation-delay: 1s;
-}
-
-.fade-in-message:nth-child(3) {
-    animation-delay: 1.5s;
-}
-
-/* 文字がぼんやり浮き上がるアニメーション */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 600px) {
-    .card-header h1 {
-        font-size: 1.6em;
-    }
-
-    .card-body p {
-        font-size: 1em;
-    }
+/* メッセージの各行のスタイル */
+.message-line {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s, transform 1s;
 }
