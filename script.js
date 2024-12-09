@@ -1,14 +1,20 @@
-// タイプライターアニメーション終了後の処理
+// ページが読み込まれた後にアニメーションを開始
 window.onload = function() {
-  setTimeout(function() {
+  // タイプライターアニメーション終了時に処理を実行
+  const typewriterText = document.getElementById('typewriter-text');
+
+  // タイプライターアニメーションが終了したとき
+  typewriterText.addEventListener('animationend', function() {
     const messageBox = document.getElementById('message-box');
-    messageBox.style.display = 'block';
+    messageBox.style.display = 'block'; // メッセージボックスを表示
+
+    // メッセージボックスをスムーズに表示
     setTimeout(function() {
       messageBox.style.opacity = '1';
       messageBox.style.transform = 'scale(1)';
       showMessageLines();
-    }, 500); // メッセージボックス表示後にアニメーション
-  }, 4500); // タイプライターアニメーション終了後
+    }, 500); // メッセージボックスのアニメーション後に次の処理
+  });
 
   // メッセージの各行を浮き上がるアニメーションで表示
   function showMessageLines() {
