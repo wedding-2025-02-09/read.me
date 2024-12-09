@@ -7,16 +7,26 @@ document.addEventListener("DOMContentLoaded", function() {
         hpMessage.style.opacity = 1;  // 1秒後に表示
     }, 1000);
 
-    // メッセージの表示順にアニメーションを適用
-    const fadeMessages = document.querySelectorAll('.fade-in-message');
-    fadeMessages.forEach((message, index) => {
-        // 各メッセージのアニメーション開始を遅延させる
-        setTimeout(() => {
-            message.style.animation = `fadeIn 2s ease-out forwards`;  // アニメーションを有効にする
-        }, index * 500);  // 各メッセージを0.5秒間隔で表示
-    });
-
-    // タイプライターアニメーションを適用（「お誕生日おめでとう！」）
+    // 「お誕生日おめでとう！」のタイプライターアニメーション
     const typewriterMessage = document.querySelector('.main-message');
-    typewriterMessage.style.animation = 'typing 3s steps(40) 1s forwards, blink 0.75s step-end infinite';
+    const typingDuration = 3000; // タイプライターアニメーションの時間
+    const cursor = document.querySelector('.main-message::after');  // キャレット (カーソル)
+
+    typewriterMessage.style.animation = `typing ${typingDuration}ms steps(40) 1s forwards, blink 0.75s step-end infinite`;
+
+    // タイプライターアニメーションが完了したらカーソルを非表示
+    setTimeout(() => {
+        typewriterMessage.style.animation = `typing ${typingDuration}ms steps(40) 1s forwards`;
+        typewriterMessage.classList.add('no-blink');
+    }, typingDuration + 1000);
+
+    // メッセージの表示順番
+    const fadeMessages = document.querySelectorAll('.fade-in-message');
+    setTimeout(() => {
+        fadeMessages.forEach((message, index) => {
+            setTimeout(() => {
+                message.style.animation = `fadeIn 2s ease-out forwards`;  // アニメーションを適用
+            }, (index + 1) * 500); // 「お誕生日おめでとう！」が終わった後に表示
+        });
+    }, typingDuration);  // 「お誕生日おめでとう！」が完全に表示された後にメッセージが表示される
 });
