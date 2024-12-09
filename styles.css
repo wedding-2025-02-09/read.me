@@ -1,66 +1,3 @@
-/* スマートフォン用のレスポンシブデザイン */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: linear-gradient(135deg, #f06, #4a90e2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: white;
-}
-
-.container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hp-message {
-    position: absolute;
-    top: 10px; 
-    left: 50%; 
-    transform: translateX(-50%);
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #333;
-    z-index: 10;
-}
-
-.card {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 30px 20px 60px 20px; /* 下部余白を大きく調整 */
-    text-align: center;
-    position: relative;
-}
-
-.card-header {
-    margin-bottom: 15px;
-}
-
-.main-message {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #333;
-}
-
-.card-body p {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-}
-
 /* タイプライター方式のアニメーション */
 .typing-animation {
     display: inline-block;
@@ -85,6 +22,11 @@ body {
     50% {
         border-color: transparent;
     }
+}
+
+/* 「お誕生日おめでとう！」のアニメーション終了後にカーソルを非表示にする */
+.main-message.no-blink::after {
+    border-right: none;  /* カーソルの非表示 */
 }
 
 /* ぼんやり浮き上がるアニメーション */
@@ -114,15 +56,5 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@media (max-width: 600px) {
-    .card-header h1 {
-        font-size: 1.6em;
-    }
-
-    .card-body p {
-        font-size: 1em;
     }
 }
