@@ -4,7 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>スマートフォンメッセージカード</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* iPhone風のグラデーション */
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .recipient {
+            font-size: 24px;
+            font-weight: bold;
+            animation: floatUp 2s ease-in-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .line {
+            border: 0;
+            height: 2px;
+            background-color: #ddd;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -17,100 +74,43 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const message = [
+            "こんにちは！",
+            "あなたに素晴らしい一日をお祈りします。",
+            "今日も笑顔で過ごしてね！"
+        ];
+
+        let messageIndex = 0;
+        let charIndex = 0;
+        const messageElement = document.getElementById('message');
+
+        // 宛先の表示
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('recipient').style.display = 'inline-block';
+                displayMessage();
+            }, 1000);  // 宛先が表示されるまで1秒の遅延
+        };
+
+        // メッセージ表示
+        function displayMessage() {
+            if (messageIndex < message.length) {
+                const currentMessage = message[messageIndex];
+                charIndex++;
+
+                // 1文字ずつ表示
+                messageElement.innerHTML = currentMessage.slice(0, charIndex);
+                
+                if (charIndex === currentMessage.length) {
+                    messageIndex++;
+                    charIndex = 0;
+                    setTimeout(displayMessage, 2000);  // メッセージが1行表示されるごとに2秒待機
+                } else {
+                    setTimeout(displayMessage, 100);  // 次の文字を表示
+                }
+            }
+        }
+    </script>
 </body>
 </html>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* iPhone風のグラデーション */
-    overflow: hidden;
-}
-
-.container {
-    width: 90%;
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-}
-
-.recipient {
-    font-size: 24px;
-    font-weight: bold;
-    animation: floatUp 2s ease-in-out forwards;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.line {
-    border: 0;
-    height: 2px;
-    background-color: #ddd;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-#message {
-    font-size: 18px;
-    color: #333;
-    line-height: 1.5;
-}
-
-const message = [
-    "こんにちは！",
-    "あなたに素晴らしい一日をお祈りします。",
-    "今日も笑顔で過ごしてね！"
-];
-
-let messageIndex = 0;
-let charIndex = 0;
-const messageElement = document.getElementById('message');
-
-// 宛先の表示
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById('recipient').style.display = 'inline-block';
-        displayMessage();
-    }, 1000);  // 宛先が表示されるまで1秒の遅延
-};
-
-// メッセージ表示
-function displayMessage() {
-    if (messageIndex < message.length) {
-        const currentMessage = message[messageIndex];
-        charIndex++;
-
-        // 1文字ずつ表示
-        messageElement.innerHTML = currentMessage.slice(0, charIndex);
-        
-        if (charIndex === currentMessage.length) {
-            messageIndex++;
-            charIndex = 0;
-            setTimeout(displayMessage, 2000);  // メッセージが1行表示されるごとに2秒待機
-        } else {
-            setTimeout(displayMessage, 100);  // 次の文字を表示
-        }
-    }
-}
