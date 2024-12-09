@@ -25,38 +25,62 @@
       max-height: 600px;
     }
 
-    /* 封筒の線画 */
-    .envelope {
+    /* 電子メール（メールアイコン）の線画 */
+    .email-icon {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 100%;
-      height: 100px;
+      max-width: 300px;
+      height: auto;
       border: 3px solid #ffffff;
-      border-radius: 10px 10px 0 0;
-      background: transparent;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      animation: envelopeAnimation 3s forwards;
+      border-radius: 10px;
+      padding: 15px;
+      box-sizing: border-box;
+      animation: emailIconAnimation 3s forwards;
     }
 
-    /* 封筒のフラップ */
-    .envelope::before {
-      content: '';
+    /* メールアイコンの封筒部分 */
+    .email-icon .envelope {
+      position: relative;
+      width: 100%;
+      height: 70%;
+      border: 3px solid #ffffff;
+      border-radius: 10px 10px 0 0;
+    }
+
+    /* メールアイコンのフラップ部分 */
+    .email-icon .flap {
       position: absolute;
-      bottom: -30px;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 20px;
+      background: transparent;
+      border-left: 3px solid #ffffff;
+      border-right: 3px solid #ffffff;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+    }
+
+    /* メールアイコンの中央部分（アイコンの内部） */
+    .email-icon .inner {
+      position: absolute;
+      top: 15%;
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
-      height: 30px;
-      background: #ffffff;
-      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      height: 40%;
+      border: 3px solid #ffffff;
+      background-color: transparent;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
     }
 
     /* 宛先のアニメーション */
     .recipient {
       position: absolute;
-      top: 30%;
+      top: 35%;
       left: 50%;
       transform: translateX(-50%);
       font-size: 1.5rem;
@@ -68,7 +92,7 @@
     /* 手紙の線画 */
     .letter {
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 80%;
@@ -91,7 +115,7 @@
     }
 
     /* アニメーション設定 */
-    @keyframes envelopeAnimation {
+    @keyframes emailIconAnimation {
       0% {
         transform: translate(-50%, -50%) scale(0);
       }
@@ -141,7 +165,11 @@
 </head>
 <body>
   <div class="container">
-    <div class="envelope"></div>
+    <div class="email-icon">
+      <div class="envelope"></div>
+      <div class="flap"></div>
+      <div class="inner"></div>
+    </div>
     <div class="recipient">・・・さんへ</div>
     <div class="letter">
       <div class="message">こんにちは！</div>
