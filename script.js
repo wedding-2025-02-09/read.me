@@ -10,15 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // 「お誕生日おめでとう！」のタイプライターアニメーション
     const typewriterMessage = document.querySelector('.main-message');
     const typingDuration = 3000; // タイプライターアニメーションの時間
-    const cursor = document.querySelector('.main-message::after');  // キャレット (カーソル)
 
-    typewriterMessage.style.animation = `typing ${typingDuration}ms steps(40) 1s forwards, blink 0.75s step-end infinite`;
-
-    // タイプライターアニメーションが完了したらカーソルを非表示
     setTimeout(() => {
-        typewriterMessage.style.animation = `typing ${typingDuration}ms steps(40) 1s forwards`;
-        typewriterMessage.classList.add('no-blink');
-    }, typingDuration + 1000);
+        typewriterMessage.classList.add('finished'); // タイプライターが終わった後にカーソルを非表示
+    }, typingDuration + 1000); // アニメーションが終わったタイミングでカーソルを消す
 
     // メッセージの表示順番
     const fadeMessages = document.querySelectorAll('.fade-in-message');
