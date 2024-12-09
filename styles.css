@@ -16,28 +16,6 @@ body {
   max-width: 500px;
 }
 
-/* タイプライターアニメーションのスタイル */
-.typewriter {
-  display: inline-block;
-  border-right: 3px solid black;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 4s steps(20) 1s forwards, blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  100% {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  50% {
-    border-color: transparent;
-  }
-}
-
 /* メッセージカードのスタイル */
 .message-box {
   display: none;
