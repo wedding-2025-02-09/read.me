@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スマートフォンメッセージカード</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff77ff, #ff1493); /*ピンク系のグラデーション (柔らかなピンク)*/
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .recipient {
+            font-size: 24px;
+            font-weight: bold;
+            animation: floatUp 2s ease-in-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .line {
+            border: 0;
+            height: 2px;
+            background-color: #ddd;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 150px; /* 高さを予め大きめに設定 */
+            max-height: 300px; /* 最大高さも指定しておく */
+            overflow: hidden; /* 文字が多くなってもスクロールしないように */
+        }
+
+        .message-line {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message-card">
+            <div class="recipient">
+                <span id="recipient">・・・さんへ</span>
+            </div>
+            <hr class="line">
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        const message = [
+            "こんにちは！",
+            "あなたに素晴らしい一日をお祈りします。",
+            "今日も笑顔で過ごしてね！"
+        ];
+
+        let messageIndex = 0;
+        const messageElement = document.getElementById('message');
+
+        // 宛先の表示後、メッセージを表示開始
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('recipient').style.display = 'inline-block';
+                displayMessage();
+            }, 1000);  // 宛先が表示されるまで1秒の遅延
+        };
+
+        // メッセージ表示
+        function displayMessage() {
+            if (messageIndex < message.length) {
+                const currentMessage = message[messageIndex];
+                const messageLine = document.createElement('div');
+                messageLine.classList.add('message-line');
+                messageLine.textContent = currentMessage;
+                
+                messageElement.appendChild(messageLine);
+                
+                // 各メッセージ行にフェードインアニメーションを適用
+                setTimeout(() => {
+                    messageLine.style.animation = 'fadeIn 2s forwards';
+                }, 100); // 少し遅延を加えてアニメーション開始
+
+                messageIndex++;
+
+                // 次のメッセージが表示されるまで待機
+                setTimeout(displayMessage, 2500);  // 2.5秒後に次のメッセージを表示
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
 
