@@ -1,204 +1,134 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>メッセージカード</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #00bcd4, #4caf50);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: 'Arial', sans-serif;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メッセージカード</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      position: relative;
-      width: 80%;
-      height: 80%;
-      max-width: 400px;
-      max-height: 600px;
-    }
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* 背景色の設定 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    /* 宛先情報 */
-    .recipient {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.5rem;
-      opacity: 0;
-      animation: recipientAnimation 3s forwards;
-      font-weight: bold;
-    }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    /* メッセージカードの枠線 */
-    .message-card {
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      height: 55%;
-      opacity: 0;
-      animation: messageCardAnimation 2s forwards 3s;
-    }
+        .message-card {
+            width: 80%;
+            max-width: 400px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-    .message-card::before,
-    .message-card::after {
-      content: '';
-      position: absolute;
-      background-color: white;
-    }
+        .recipient {
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 1s ease, opacity 1s ease;
+        }
 
-    .message-card .top {
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      animation: topLine 2s forwards;
-    }
+        .border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid transparent;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 2s ease;
+        }
 
-    .message-card .right {
-      right: 0;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      animation: rightLine 2s forwards 2s;
-    }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: height 2s ease, opacity 2s ease;
+        }
 
-    .message-card .bottom {
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      animation: bottomLine 2s forwards 4s;
-    }
-
-    .message-card .left {
-      left: 0;
-      bottom: 0;
-      width: 3px;
-      height: 100%;
-      animation: leftLine 2s forwards 6s;
-    }
-
-    /* メッセージの1行ずつ表示 */
-    .message {
-      display: none;
-      animation: messageAnimation 10s forwards; /* メッセージ表示速度 */
-    }
-
-    /* アニメーション設定 */
-    @keyframes recipientAnimation {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes messageCardAnimation {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes topLine {
-      0% {
-        width: 0;
-      }
-      100% {
-        width: 100%;
-      }
-    }
-
-    @keyframes rightLine {
-      0% {
-        height: 0;
-      }
-      100% {
-        height: 100%;
-      }
-    }
-
-    @keyframes bottomLine {
-      0% {
-        width: 0;
-      }
-      100% {
-        width: 100%;
-      }
-    }
-
-    @keyframes leftLine {
-      0% {
-        height: 0;
-      }
-      100% {
-        height: 100%;
-      }
-    }
-
-    @keyframes messageAnimation {
-      0% {
-        opacity: 0;
-      }
-      25% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 1;
-      }
-      75% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-  </style>
+        .message p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- 宛先情報 -->
-    <div class="recipient">・・・さんへ</div>
-
-    <!-- メッセージカード -->
-    <div class="message-card">
-      <div class="top"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="left"></div>
-      <div class="message">こんにちは！</div>
-      <div class="message">お元気ですか？</div>
-      <div class="message">今日も素晴らしい一日を！</div>
-      <div class="message">あなたのことをいつも思っています。</div>
-      <div class="message">良い一日を過ごしてください。</div>
-      <div class="message">またお会いできるのを楽しみにしています。</div>
-      <div class="message">心からの祝福を込めて。</div>
+    <div class="card-container">
+        <div class="message-card">
+            <div id="recipient" class="recipient">・・・さんへ</div>
+            <div id="border" class="border"></div>
+            <div id="message" class="message"></div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // メッセージが順番に表示される
-    document.addEventListener("DOMContentLoaded", function() {
-      const messages = document.querySelectorAll('.message');
-      messages.forEach((msg, index) => {
-        setTimeout(() => {
-          msg.style.display = 'block';
-        }, 8000 + index * 2000); // 枠線アニメーション後にメッセージが表示
-      });
-    });
-  </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 宛先アニメーション
+            const recipient = document.getElementById("recipient");
+            recipient.style.opacity = 1;
+            recipient.style.transform = "translateY(0)";
+
+            // 四角形のアニメーション
+            const border = document.getElementById("border");
+            setTimeout(() => {
+                border.style.opacity = 1;
+                border.style.borderTopColor = "#333";
+                border.style.borderRightColor = "#333";
+                border.style.borderBottomColor = "#333";
+                border.style.borderLeftColor = "#333";
+            }, 1000);
+
+            // メッセージの表示
+            const message = document.getElementById("message");
+            const messageLines = [
+                "こんにちは！",
+                "素晴らしい日を過ごしていますか？",
+                "一緒に過ごした時間がとても楽しかったです。",
+                "これからもよろしくお願いします！",
+                "また会えるのを楽しみにしています。",
+                "健康で幸せな日々を祈っています。",
+                "ありがとう！"
+            ];
+
+            setTimeout(() => {
+                message.style.height = 'auto';
+                message.style.opacity = 1;
+                let lineCount = 0;
+
+                const interval = setInterval(() => {
+                    if (lineCount < messageLines.length) {
+                        const p = document.createElement("p");
+                        p.textContent = messageLines[lineCount];
+                        message.appendChild(p);
+                        lineCount++;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
