@@ -1,13 +1,13 @@
 // ページが読み込まれた後にアニメーションを開始
 window.onload = function() {
-  const typewriterText = document.getElementById('typewriter-text');
+  const addressText = document.getElementById('address-text');
   const textToDisplay = "○○君へ"; // 表示するテキスト
   let currentIndex = 0;
 
   // 1文字ずつ表示する関数
   function typeWriter() {
     if (currentIndex < textToDisplay.length) {
-      typewriterText.innerHTML += textToDisplay.charAt(currentIndex);
+      addressText.innerHTML += textToDisplay.charAt(currentIndex);
       currentIndex++;
     } else {
       // タイピング終了後、メッセージボックスの表示処理を実行
@@ -28,8 +28,8 @@ window.onload = function() {
 
   // タイピングアニメーション終了後、浮き上がるアニメーションを追加
   setTimeout(function() {
-    typewriterText.style.opacity = '1';
-    typewriterText.style.transform = 'translateY(0)';
+    addressText.style.opacity = '1';
+    addressText.style.transform = 'translateY(0)';
   }, 500); // 文字の表示後に浮き上がり
 
   // メッセージの各行を浮き上がるアニメーションで表示
