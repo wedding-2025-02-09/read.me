@@ -1,169 +1,116 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>メッセージカード</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #00bcd4, #4caf50);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: 'Arial', sans-serif;
-      color: white;
-    }
-
-    .container {
-      position: relative;
-      width: 80%;
-      height: 80%;
-      max-width: 400px;
-      max-height: 600px;
-    }
-
-    /* 封筒の線画 */
-    .envelope {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100px;
-      border: 3px solid #ffffff;
-      border-radius: 10px 10px 0 0;
-      background: transparent;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      animation: envelopeAnimation 3s forwards;
-    }
-
-    /* 封筒のフラップ */
-    .envelope::before {
-      content: '';
-      position: absolute;
-      bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 30px;
-      background: #ffffff;
-      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-    }
-
-    /* 宛先のアニメーション */
-    .recipient {
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.5rem;
-      opacity: 0;
-      animation: recipientAnimation 3s forwards;
-      font-weight: bold;
-    }
-
-    /* 手紙の線画 */
-    .letter {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      height: 50%;
-      background: transparent;
-      border: 3px solid #ffffff;
-      border-radius: 10px;
-      display: none;
-      padding: 20px;
-      color: black;
-      font-size: 1.2rem;
-      opacity: 0;
-      animation: openLetter 1.5s forwards 3s;
-    }
-
-    /* メッセージのスタイル */
-    .message {
-      display: none;
-      animation: messageAnimation 5s forwards;
-    }
-
-    /* アニメーション設定 */
-    @keyframes envelopeAnimation {
-      0% {
-        transform: translate(-50%, -50%) scale(0);
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1);
-      }
-    }
-
-    @keyframes recipientAnimation {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes openLetter {
-      0% {
-        transform: translate(-50%, -50%) scale(0.8);
-        opacity: 0;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-      }
-    }
-
-    @keyframes messageAnimation {
-      0% {
-        opacity: 0;
-      }
-      25% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 1;
-      }
-      75% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スマートフォンメッセージカード</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="envelope"></div>
-    <div class="recipient">・・・さんへ</div>
-    <div class="letter">
-      <div class="message">こんにちは！</div>
-      <div class="message">お元気ですか？</div>
-      <div class="message">今日も素晴らしい一日を！</div>
-      <div class="message">あなたのことをいつも思っています。</div>
-      <div class="message">良い一日を過ごしてください。</div>
-      <div class="message">またお会いできるのを楽しみにしています。</div>
-      <div class="message">心からの祝福を込めて。</div>
+    <div class="container">
+        <div class="message-card">
+            <div class="recipient">
+                <span id="recipient">・・・さんへ</span>
+            </div>
+            <hr class="line">
+            <div id="message"></div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // メッセージが順番に表示される
-    document.addEventListener("DOMContentLoaded", function() {
-      const messages = document.querySelectorAll('.message');
-      messages.forEach((msg, index) => {
-        setTimeout(() => {
-          msg.style.display = 'block';
-        }, index * 1000);
-      });
-    });
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* iPhone風のグラデーション */
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.recipient {
+    font-size: 24px;
+    font-weight: bold;
+    animation: floatUp 2s ease-in-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.line {
+    border: 0;
+    height: 2px;
+    background-color: #ddd;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#message {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.5;
+}
+
+const message = [
+    "こんにちは！",
+    "あなたに素晴らしい一日をお祈りします。",
+    "今日も笑顔で過ごしてね！"
+];
+
+let messageIndex = 0;
+let charIndex = 0;
+const messageElement = document.getElementById('message');
+
+// 宛先の表示
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('recipient').style.display = 'inline-block';
+        displayMessage();
+    }, 1000);  // 宛先が表示されるまで1秒の遅延
+};
+
+// メッセージ表示
+function displayMessage() {
+    if (messageIndex < message.length) {
+        const currentMessage = message[messageIndex];
+        charIndex++;
+
+        // 1文字ずつ表示
+        messageElement.innerHTML = currentMessage.slice(0, charIndex);
+        
+        if (charIndex === currentMessage.length) {
+            messageIndex++;
+            charIndex = 0;
+            setTimeout(displayMessage, 2000);  // メッセージが1行表示されるごとに2秒待機
+        } else {
+            setTimeout(displayMessage, 100);  // 次の文字を表示
+        }
+    }
+}
