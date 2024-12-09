@@ -26,6 +26,12 @@ window.onload = function() {
   // 文字を1文字ずつ表示する間隔を設定
   let typingInterval = setInterval(typeWriter, 200); // 200ミリ秒ごとに文字を表示
 
+  // タイピングアニメーション終了後、浮き上がるアニメーションを追加
+  setTimeout(function() {
+    typewriterText.style.opacity = '1';
+    typewriterText.style.transform = 'translateY(0)';
+  }, 500); // 文字の表示後に浮き上がり
+
   // メッセージの各行を浮き上がるアニメーションで表示
   function showMessageLines() {
     const lines = document.querySelectorAll('.message-line');
