@@ -37,24 +37,30 @@ body {
     margin-bottom: 20px;
 }
 
-.card-footer button {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    font-size: 1.1em;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+/* タイプライター方式のアニメーション */
+.typing-animation {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid #333;
+    animation: typing 3s steps(40) 1s forwards, blink 0.75s step-end infinite;
 }
 
-.card-footer button:hover {
-    background-color: #357ABD;
-    transform: scale(1.05);
+/* タイプライター効果 */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
 }
 
-.card-footer button:active {
-    transform: scale(0.95);
+/* キャレットの点滅効果 */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
 }
 
 @media (max-width: 600px) {
@@ -63,11 +69,6 @@ body {
     }
 
     .card-body p {
-        font-size: 1em;
-    }
-
-    .card-footer button {
-        padding: 12px 20px;
         font-size: 1em;
     }
 }
