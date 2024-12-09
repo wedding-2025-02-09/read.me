@@ -16,10 +16,8 @@ body {
   max-width: 500px;
 }
 
-/* タイプライター風テキストに浮き上がるアニメーション */
-.typewriter {
-  display: inline-block;
-  white-space: nowrap;
+/* メッセージの各行のスタイル（浮き上がりアニメーション） */
+.message-line {
   opacity: 0;
   transform: translateY(20px); /* 最初は下に配置 */
   transition: opacity 1s ease, transform 1s ease; /* スムーズな浮き上がり */
@@ -36,12 +34,5 @@ body {
   margin-top: 20px;
   opacity: 0;
   transform: scale(0.8);
-  transition: opacity 1s ease, transform 1s ease; /* よりスムーズなトランジション */
-}
-
-/* メッセージの各行のスタイル */
-.message-line {
-  opacity: 0;
-  transform: translateY(20px);
   transition: opacity 1s ease, transform 1s ease; /* よりスムーズなトランジション */
 }
