@@ -25,7 +25,7 @@
       max-height: 600px;
     }
 
-    /* 電子メール（メールアイコン）の線画 */
+    /* メールアイコンの線画 */
     .email-icon {
       position: absolute;
       top: 50%;
@@ -33,7 +33,7 @@
       transform: translate(-50%, -50%);
       width: 100%;
       max-width: 300px;
-      height: auto;
+      height: 150px; /* 高さを増加させて縦幅が広がるように */
       border: 3px solid #ffffff;
       border-radius: 10px;
       padding: 15px;
@@ -45,9 +45,11 @@
     .email-icon .envelope {
       position: relative;
       width: 100%;
-      height: 70%;
+      height: 70%; /* 高さの割合を変更 */
       border: 3px solid #ffffff;
       border-radius: 10px 10px 0 0;
+      background-color: transparent;
+      animation: openEnvelope 3s forwards 3s; /* 開封アニメーションを追加 */
     }
 
     /* メールアイコンのフラップ部分 */
@@ -62,6 +64,7 @@
       border-left: 3px solid #ffffff;
       border-right: 3px solid #ffffff;
       clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      animation: flapAnimation 2s forwards 3s; /* フラップのアニメーション */
     }
 
     /* メールアイコンの中央部分（アイコンの内部） */
@@ -130,6 +133,24 @@
       }
       100% {
         opacity: 1;
+      }
+    }
+
+    @keyframes openEnvelope {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1) rotateX(180deg); /* 封筒が開く */
+      }
+    }
+
+    @keyframes flapAnimation {
+      0% {
+        transform: translateX(-50%) rotateX(0deg);
+      }
+      100% {
+        transform: translateX(-50%) rotateX(180deg); /* フラップが開く */
       }
     }
 
