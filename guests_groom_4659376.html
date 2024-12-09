@@ -3,23 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webメッセージカード</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>メッセージカード</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #00bcd4, #4caf50);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      color: white;
+    }
+
+    .container {
+      position: relative;
+      width: 80%;
+      height: 80%;
+      max-width: 400px;
+      max-height: 600px;
+    }
+
+    /* 封筒のスタイル */
+    .envelope {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: auto;
+      animation: envelopeAnimation 3s forwards;
+    }
+
+    .envelope img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* 宛先のアニメーション */
+    .recipient {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: recipientAnimation 3s forwards;
+      font-weight: bold;
+    }
+
+    /* 手紙が開くアニメーション */
+    .letter {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 60%;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      display: none;
+      padding: 20px;
+      color: black;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: openLetter 1.5s forwards 3s;
+    }
+
+    .message {
+      display: none;
+      animation: messageAnimation 5s forwards;
+    }
+
+    @keyframes envelopeAnimation {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes recipientAnimation {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes openLetter {
+      0% {
+        transform: translateX(-50%) rotateX(-90deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(-50%) rotateX(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes messageAnimation {
+      0% {
+        opacity: 0;
+      }
+      25% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      75% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <!-- idをaddress-textに変更 -->
-    <div id="address-text" class="message-line"></div> <!-- 空にしておく -->
-
-    <div id="message-box" class="message-box">
-      <div class="message-line">今日はお元気ですか？</div>
-      <div class="message-line">お仕事も順調かな？</div>
-      <div class="message-line">新しい趣味は見つかりましたか？</div>
-      <div class="message-line">またお話できる日を楽しみにしています！</div>
-      <div class="message-line">元気でね！</div>
+    <div class="envelope">
+      <img src="https://example.com/envelope.png" alt="Envelope">
+    </div>
+    <div class="recipient">・・・さんへ</div>
+    <div class="letter">
+      <div class="message">こんにちは！</div>
+      <div class="message">お元気ですか？</div>
+      <div class="message">今日も素晴らしい一日を！</div>
+      <div class="message">あなたのことをいつも思っています。</div>
+      <div class="message">良い一日を過ごしてください。</div>
+      <div class="message">またお会いできるのを楽しみにしています。</div>
+      <div class="message">心からの祝福を込めて。</div>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // メッセージが順番に表示される
+    document.addEventListener("DOMContentLoaded", function() {
+      const messages = document.querySelectorAll('.message');
+      messages.forEach((msg, index) => {
+        setTimeout(() => {
+          msg.style.display = 'block';
+        }, index * 1000);
+      });
+    });
+  </script>
 </body>
 </html>
