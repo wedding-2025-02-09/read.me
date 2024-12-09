@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>メッセージカード</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webメッセージカード</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h1 class="main-message typing-animation">お誕生日おめでとう！</h1> <!-- タイプライターアニメーション -->
-            </div>
-            <div class="card-body">
-                <p class="fade-in-message">素敵な一年になりますように！</p> <!-- 文字がぼんやり浮き上がるアニメーション -->
-                <p class="fade-in-message">毎日が幸せでありますように。</p>
-                <p class="fade-in-message">心からの感謝を込めて。</p>
-            </div>
-        </div>
-        <div class="hp-message">HPB!!</div> <!-- カード外に配置されたメッセージ -->
+  <div class="container">
+    <div id="typewriter-text" class="typewriter">○○君へ</div>
+    <div id="message-box" class="message-box">
+      <div class="message-line">今日はお元気ですか？</div>
+      <div class="message-line">お仕事も順調かな？</div>
+      <div class="message-line">新しい趣味は見つかりましたか？</div>
+      <div class="message-line">またお話できる日を楽しみにしています！</div>
+      <div class="message-line">元気でね！</div>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
