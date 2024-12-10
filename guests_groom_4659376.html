@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScanME! -message card</title>
+    <title>ScanME! - message card</title>
     <style>
         * {
             margin: 0;
@@ -29,6 +29,7 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            position: relative; /* 相対位置指定 */
         }
 
         .recipient {
@@ -82,6 +83,51 @@
                 opacity: 1;
             }
         }
+
+        /* "Thanks message"の位置変更 */
+        .text {
+            font-size: 36px; /* フォントサイズを大きく */
+            color: #1f202000;
+            position: absolute;  /* 位置指定を絶対に設定 */
+            top: -100px;  /* 上に80px移動 */
+            left: 12.5%;  /* 横方向の中央揃え */
+            transform: translateX(-50%);  /* 横方向で中央揃えを完全にする */
+            background-clip: text;
+            overflow: clip;
+            background-color: #fefcef;
+            animation: floatUp 2s ease-in-out forwards; /* floatUpアニメーションを追加 */
+        }
+
+        /* 画像のスタイル */
+        .image-container {
+            position: absolute; /* 絶対位置指定 */
+            bottom: -400px; /* メッセージカードの真下に配置 */
+            left: 12.5%; /* 左右中央揃え */
+            transform: translateX(-50%); /* 完全な中央揃え */
+            width: 300px; /* 画像の幅 */
+            height: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            opacity: 0; /* 初期状態で透明にする */
+            animation: floatImage 2s ease-out forwards; /* アニメーション追加 */
+        }
+
+        /* 画像が浮き上がるアニメーション */
+        @keyframes floatImage {
+            0% {
+                transform: translateY(30px); /* 下から浮き上がる */
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0); /* 最終的には元の位置に */
+                opacity: 1;
+            }
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +138,12 @@
             </div>
             <hr class="line">
             <div id="message"></div>
+        </div>
+        <div class="text">Thanks message</div>
+
+        <!-- 画像をメッセージカードの真下に配置 -->
+        <div class="image-container">
+            <img src="https://lh3.googleusercontent.com/d/12sRTYom5Vg3C9mNxIDjOK4ytLIArWPxE" alt="Your Image" />
         </div>
     </div>
 
