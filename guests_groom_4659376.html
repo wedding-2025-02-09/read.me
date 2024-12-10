@@ -15,10 +15,10 @@
             font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: auto;
+            align-items: flex-start;  /* スクロールする場合は上に揃え */
+            min-height: 100vh;  /* 最小高さを画面全体に */
             background: linear-gradient(135deg, #ff7e5f, #feb47b); /* オレンジ系 */
-            overflow: hidden;
+            overflow-y: auto; /* 垂直方向にスクロール可能 */
         }
 
         .container {
@@ -30,6 +30,7 @@
             text-align: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             position: relative; /* 相対位置指定 */
+            margin-top: 50px; /* メッセージカード上部の余白 */
         }
 
         .recipient {
@@ -58,7 +59,7 @@
         }
 
         #message {
-            font-size: 18px;
+            font-size: 10px;
             color: #333;
             line-height: 1.5;
             display: flex;
@@ -86,11 +87,11 @@
 
         /* "Thanks message"の位置変更 */
         .text {
-            font-size: 36px; /* フォントサイズを大きく */
+            font-size: 25px; /* フォントサイズを大きく */
             color: #1f202000;
-            position: absolute;  /* 位置指定を絶対に設定 */
-            top: -100px;  /* 上に80px移動 */
-            left: 12.5%;  /* 横方向の中央揃え */
+            position: relative;  /* 絶対位置ではなく相対位置 */
+            top: 0px;  /* メッセージカードの内容と重ならないように調整 */
+            left: 0%;  /* 横方向の中央揃え */
             transform: translateX(-50%);  /* 横方向で中央揃えを完全にする */
             background-clip: text;
             overflow: clip;
@@ -101,10 +102,10 @@
         /* 画像のスタイル */
         .image-container {
             position: absolute; /* 絶対位置指定 */
-            bottom: -400px; /* メッセージカードの真下に配置 */
+            bottom: -350px; /* メッセージカードの真下に配置 */
             left: 12.5%; /* 左右中央揃え */
             transform: translateX(-50%); /* 完全な中央揃え */
-            width: 300px; /* 画像の幅 */
+            width: 300px; /* 画像の幅を2倍に変更 */
             height: auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             opacity: 0; /* 初期状態で透明にする */
