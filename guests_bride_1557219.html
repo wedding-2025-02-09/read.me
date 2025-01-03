@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Animation & Message Card</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-content: center;
+      background-color: #000;
+      font-family: system-ui, sans-serif;
+    }
+
+    /* 1ページ目のスタイル */
+    .text {
+      font-weight: 900;
+      font-size: 20vw;
+      color: #1f202000;
+      position: relative;
+      background-clip: text;
+      overflow: clip;
+      background-color: #fefcef;
+    }
+
+    .text::before, .text::after {
+      content: '';
+      position: absolute;
+      background-color: #3cf5;
+      width: 180%;
+      top: 50%;
+      left: 50%;
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      border-top-left-radius: 60% 80%;
+      border-top-right-radius: 50% 80%;
+      border-bottom-left-radius: 60% 80%;
+      border-bottom-right-radius: 50% 80%;
+      mix-blend-mode: multiply;
+      animation: rotateText 10s linear infinite;
+    }
+
+    .text::after {
+      animation-delay: -4s;
+      animation-duration: 8s;
+    }
+
+    @keyframes rotateText {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* 2ページ目のスタイル */
+    #page2 {
+      display: none;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb3d9, #ff80bf); /* ピンク系 (パステルピンク) */
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .recipient {
+      font-size: 24px;
+      font-weight: bold;
+      animation: floatUp 2s ease-in-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .line {
+      border: 0;
+      height: 2px;
+      background-color: #ddd;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    #message {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 150px;
+      max-height: 300px;
+      overflow: hidden;
+    }
+
+    .message-line {
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'flex';
+        displayMessage();  // 2ページ目のメッセージ表示開始
+      }, 5000);  // 5秒後にページ2に切り替え
+    };
+
+    const message = [
+      "こんにちは！",
+      "あなたに素晴らしい一日をお祈りします。",
+      "今日も笑顔で過ごしてね！"
+    ];
+
+    let messageIndex = 0;
+    const messageElement = document.getElementById('message');
+
+    function displayMessage() {
+      if (messageIndex < message.length) {
+        const currentMessage = message[messageIndex];
+        const messageLine = document.createElement('div');
+        messageLine.classList.add('message-line');
+        messageLine.textContent = currentMessage;
+        
+        messageElement.appendChild(messageLine);
+        
+        // 各メッセージ行にフェードインアニメーションを適用
+        setTimeout(() => {
+          messageLine.style.animation = 'fadeIn 2s forwards';
+        }, 100); // 少し遅延を加えてアニメーション開始
+
+        messageIndex++;
+
+        // 次のメッセージが表示されるまで待機
+        setTimeout(displayMessage, 2500);  // 2.5秒後に次のメッセージを表示
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- 1ページ目 -->
+  <div id="page1" class="text">
+    Thanks Message
+  </div>
+
+  <!-- 2ページ目 -->
+  <div id="page2">
+    <div class="container">
+      <div class="message-card">
+        <div class="recipient">
+          <span id="recipient">・・・さんへ</span>
+        </div>
+        <hr class="line">
+        <div id="message"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
