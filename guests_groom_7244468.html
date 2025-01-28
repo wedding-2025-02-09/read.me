@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScanME! -message card</title>
+    <title>ScanME! - message card</title>
     <style>
         * {
             margin: 0;
@@ -15,10 +15,10 @@
             font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #ffb3d9, #ff80bf);　/*ピンク系 (パステルピンク)*/
-            overflow: hidden;
+            align-items: flex-start;  /* スクロールする場合は上に揃え */
+            min-height: 100vh;  /* 最小高さを画面全体に */
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* オレンジ系 */
+            overflow-y: auto; /* 垂直方向にスクロール可能 */
         }
 
         .container {
@@ -29,6 +29,8 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            position: relative; /* 相対位置指定 */
+            margin-top: 50px; /* メッセージカード上部の余白 */
         }
 
         .recipient {
@@ -57,7 +59,7 @@
         }
 
         #message {
-            font-size: 18px;
+            font-size: 10px;
             color: #333;
             line-height: 1.5;
             display: flex;
@@ -82,24 +84,78 @@
                 opacity: 1;
             }
         }
+
+        /* "Thanks message"の位置変更 */
+        .text {
+            font-size: 25px; /* フォントサイズを大きく */
+            color: #1f202000;
+            position: relative;  /* 絶対位置ではなく相対位置 */
+            top: 0px;  /* メッセージカードの内容と重ならないように調整 */
+            left: 0%;  /* 横方向の中央揃え */
+            transform: translateX(-50%);  /* 横方向で中央揃えを完全にする */
+            background-clip: text;
+            overflow: clip;
+            background-color: #fefcef;
+            animation: floatUp 2s ease-in-out forwards; /* floatUpアニメーションを追加 */
+        }
+
+        /* 画像のスタイル */
+        .image-container {
+            position: absolute; /* 絶対位置指定 */
+            bottom: -425px; /* メッセージカードの真下に配置 */
+            left: 10%; /* 左右中央揃え */
+            transform: translateX(-50%); /* 完全な中央揃え */
+            width: 300px; /* 画像の幅を2倍に変更 */
+            height: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            opacity: 0; /* 初期状態で透明にする */
+            animation: floatImage 2s ease-out forwards; /* アニメーション追加 */
+        }
+
+        /* 画像が浮き上がるアニメーション */
+        @keyframes floatImage {
+            0% {
+                transform: translateY(30px); /* 下から浮き上がる */
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0); /* 最終的には元の位置に */
+                opacity: 1;
+            }
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="message-card">
             <div class="recipient">
-                <span id="recipient">・・・さんへ</span>
+                <span id="recipient">やぶうち へ</span>
             </div>
             <hr class="line">
             <div id="message"></div>
+        </div>
+        <div class="text">Thanks message</div>
+
+        <!-- 画像をメッセージカードの真下に配置 -->
+        <div class="image-container">
+            <img src="https://lh3.googleusercontent.com/d/1WyM60pcye4_b1p1wOh4rOb941jAwowvO" alt="Your Image" />
         </div>
     </div>
 
     <script>
         const message = [
-            "こんにちは！",
-            "あなたに素晴らしい一日をお祈りします。",
-            "今日も笑顔で過ごしてね！"
+            "今日は来てくれてありがとう",
+            "やぶうちとは 高校在学中よりも",
+            "卒業後に仲良くすることが増えた印象です",
+            "東京でバリバリ働いてるみたいですが",
+            "健康には気を付けてください",
+            "またみんなで塩元帥行きましょ～"
         ];
 
         let messageIndex = 0;
@@ -137,5 +193,3 @@
     </script>
 </body>
 </html>
-
-
