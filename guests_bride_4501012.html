@@ -17,7 +17,7 @@
             justify-content: center;
             align-items: flex-start;  /* スクロールする場合は上に揃え */
             min-height: 100vh;  /* 最小高さを画面全体に */
-            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* オレンジ系 */
+            background: linear-gradient(135deg, #b2f2b2, #80e0a7);　/*緑系 (パステルグリーン)*/
             overflow-y: auto; /* 垂直方向にスクロール可能 */
         }
 
@@ -102,7 +102,7 @@
         /* 画像のスタイル */
         .image-container {
             position: absolute; /* 絶対位置指定 */
-            bottom: -275px; /* メッセージカードの真下に配置 */
+            bottom: -300px; /* メッセージカードの真下に配置 */
             left: 10%; /* 左右中央揃え */
             transform: translateX(-50%); /* 完全な中央揃え */
             width: 300px; /* 画像の幅を2倍に変更 */
@@ -132,7 +132,16 @@
     </style>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="message-card">
+            <div class="recipient">
+                <span id="recipient">みなさま へ</span>
+            </div>
+            <hr class="line">
+            <div id="message"></div>
+        </div>
+        <div class="text">Thanks message</div>
+
         <!-- 画像をメッセージカードの真下に配置 -->
         <div class="image-container">
             <img src="https://lh3.googleusercontent.com/d/14LHtk2JjjJU6_quwo9Su1W58qHMP0CmY" alt="Your Image" />
@@ -146,7 +155,7 @@
             "小さい頃からたくさんお世話になったので", 
             "晴れ姿を見届けてもらえて とても嬉しいです",
             "今日の日のために2人で頑張って準備してきました",
-            "神戸での結婚式楽しんでください❤"
+            "神戸での結婚式楽しんでください♡"
         ];
 
         let messageIndex = 0;
@@ -184,4 +193,3 @@
     </script>
 </body>
 </html>
-
